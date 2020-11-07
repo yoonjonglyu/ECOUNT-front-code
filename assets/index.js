@@ -28,6 +28,8 @@ class JSDOM {
     set DOM ({ key, value }){
         if(key !== null && value !== null){
             this._dom[key] = value;
+        } else {
+            console.error("SET DOM INVALID VALUES")
         }
     }
 }
