@@ -13,6 +13,15 @@ const $$ = (target) => {
     return document.querySelectorAll(target);
 }
 /**
+ * @description DOM create 간편화
+ * @param {String} target 생성할 태그Name을 입력해주세요.
+ */
+const $Create = (target) => {
+    return document.createElement(target);
+}
+
+
+/**
  * @class JSDOM
  * @description DOM 셀렉 관련 클래스 Data Object
  */
