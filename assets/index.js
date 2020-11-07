@@ -29,7 +29,15 @@ class JSDOM {
         if(key !== null && value !== null){
             this._dom[key] = value;
         } else {
-            console.error("SET DOM INVALID VALUES")
+            console.error("SET DOM INVALID VALUES");
         }
+    }
+    /**
+     * 
+     * @param {String} keyName 
+     * @param {Node} Node 
+     */
+    saveDom (keyName, Node) {
+        this.DOM = {key : keyName, value : Node};
     }
 }
