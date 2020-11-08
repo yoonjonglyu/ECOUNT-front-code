@@ -81,7 +81,7 @@ const initMain = () => {
                 popup.postMessage(request, "*");
             }
 
-            setTimeout(popupPost, 500);
+            setTimeout(popupPost, 100);
         });
         button.addEventListener('click', (e) => {
             const popup = window.open(popupUrl, category, popupConfig);
@@ -109,7 +109,7 @@ const initMain = () => {
                 popup.postMessage(request, "*");
             }
 
-            setTimeout(popupPost, 500);
+            setTimeout(popupPost, 100);
         })
 
         /** dom tree */
@@ -304,7 +304,7 @@ const initMain = () => {
         inputData.forEach((props) => {
             searchInput(props.category, props.codeInfo, props.labelInfo);
         });
-        
+
         searchForm();
     }
 
