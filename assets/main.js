@@ -6,8 +6,10 @@ const initMain = () => {
     /**
     * @description 검색 관련 인풋 컴포넌트
     * @param {String} category 카테고리 명칭
-    * @param {Object} codeInfo {id, popupUrl} 
-    * @param {Object} labelInfo {readAvail}
+    * @param {Object} codeInfo {id:any, popupUrl:String, requirementCode:requirement, requirementBtn:requirement} 
+    * @param {Object} labelInfo {readAvail:Boolean}
+    * @example
+    * <requirement> = {title:String, items:Object[]{type:String, value: String}}
     */
     const searchInput = (category, codeInfo, labelInfo) => {
         const {
@@ -15,11 +17,13 @@ const initMain = () => {
         } = Main.DOM;
         const {
             id,
-            popupUrl
+            popupUrl,
+            requirementCode,
+            requirementBtn
         } = codeInfo;
         const {
             readAvail
-        } = labelInfo
+        } = labelInfo;
 
         /** create */
         const box = $Create('div');
@@ -53,9 +57,59 @@ const initMain = () => {
 
         inputCode.addEventListener('dblclick', (e) => {
             const popup = window.open(popupUrl, category, popupConfig);
+            const {
+                title,
+                items
+            }
+            = requirementCode;
+            const request = {
+                category : category,
+                requirement : {
+                    requirementTitle : title,
+                    items : [
+                    ]
+                }
+            };
+
+            if(items.length > 0){
+                request.requirement.items = items;
+            } else {
+                console.error("요구 조건이 없습니다.");
+            }
+
+            const popupPost = () => {
+                popup.postMessage(request, "*");
+            }
+
+            setTimeout(popupPost, 500);
         });
         button.addEventListener('click', (e) => {
             const popup = window.open(popupUrl, category, popupConfig);
+            const {
+                title,
+                items
+            }
+            = requirementBtn;
+            const request = {
+                category : category,
+                requirement : {
+                    requirementTitle : title,
+                    items : [
+                    ]
+                }
+            };
+
+            if(items.length > 0){
+                request.requirement.items = items;
+            } else {
+                console.error("요구 조건이 없습니다.");
+            }
+
+            const popupPost = () => {
+                popup.postMessage(request, "*");
+            }
+
+            setTimeout(popupPost, 500);
         })
 
         /** dom tree */
@@ -74,7 +128,7 @@ const initMain = () => {
         const {
             infoForm
         } = Main.DOM;
-    
+
         infoForm.addEventListener('submit', (e) => { // 과제 지문이 정확히 뭘말하는지 모호해서 내가 이해한대로 만든다.
             e.preventDefault();
             const target = [...e.target].filter((node) => node.nodeName === "INPUT");
@@ -90,9 +144,167 @@ const initMain = () => {
     }
 
     const render = () => {
-        searchInput('선택1', { id: 1, popupUrl: "./popup1.html" }, { readAvail: true });
-        searchInput('선택2', { id: 2, popupUrl: "./popup2.html" }, { readAvail: true });
-        searchInput('선택3', { id: 3, popupUrl: "./popup3.html" }, { readAvail: false });
+        const inputData = [
+            {
+                category : "선택1",
+                codeInfo : {
+                    id : 1,
+                    popupUrl : "./popup1.html",
+                    requirementCode : {
+                        title : "규격",
+                        items : [
+                            {
+                                type : "code",
+                                value : "규격명"
+                            },
+                            {
+                                type : "label",
+                                value : "규격그룹"
+                            }
+                        ]
+                    },
+                    requirementBtn : {
+                        title : "규격",
+                        items : [
+                            {
+                                type : "code",
+                                value : "규격명"
+                            },
+                            {
+                                type : "label",
+                                value : "규격그룹"
+                            },
+                            {
+                                type : "code",
+                                value : "규격계산"
+                            },
+                            {
+                                type : "label",
+                                value : "규격계산그룹"
+                            }
+                        ]
+                    }
+                },
+                labelInfo : {
+                    readAvail : true
+                }
+            },
+            {
+                category : "선택2",
+                codeInfo : {
+                    id : 2,
+                    popupUrl : "./popup2.html",
+                    requirementCode : 
+                    {   /*
+                        input( label ) + button + input( code )로 구성된다.(검색 위젯은 기본적으로 code - label 순서로 구성됨)
+                        popup2.html을 로딩하고 선택한 값을 표시한다.
+                        이게 대체 뭔소리인지 이해를 못하겠다. 그래서 그냥 label - code 순서로 주라는걸로 처리한다.(테스트중에 물어보라는 느낌인거같기도하다 -_-)
+                        */
+                        title : "규격",
+                        items : [
+                            {
+                                type : "label",
+                                value : "원재료"
+                            },
+                            {
+                                type : "code",
+                                value : "부재료"
+                            },
+                            {
+                                type : "label",
+                                value : "제품"
+                            },
+                            {
+                                type : "code",
+                                value : "반제품"
+                            },
+                            {
+                                type : "label",
+                                value : "상품"
+                            },
+                            {
+                                type : "code",
+                                value : "무형상품"
+                            }
+                        ]
+                    },
+                    requirementBtn : 
+                    { 
+                        title : "규격",
+                        items : [
+                            {
+                                type : "label",
+                                value : "원재료"
+                            },
+                            {
+                                type : "code",
+                                value : "부재료"
+                            },
+                            {
+                                type : "label",
+                                value : "제품"
+                            },
+                            {
+                                type : "code",
+                                value : "반제품"
+                            },
+                            {
+                                type : "label",
+                                value : "상품"
+                            },
+                            {
+                                type : "code",
+                                value : "무형상품"
+                            }
+                        ]
+                    },
+                },
+                labelInfo : {
+                    readAvail : true
+                }
+            },
+            {
+                category : "선택3",
+                codeInfo : {
+                    id : 3,
+                    popupUrl : "./popup3.html",
+                    requirementCode : {
+                        title : "품질검사방법",
+                        items : [
+                            {
+                                type : "code",
+                                value : "전수"
+                            },
+                            {
+                                type : "code",
+                                value : "샘플링(%)"
+                            }
+                        ]
+                    },
+                    requirementBtn : {
+                        title : "품질검사방법",
+                        items : [
+                            {
+                                type : "code",
+                                value : "전수"
+                            },
+                            {
+                                type : "code",
+                                value : "샘플링(%)"
+                            }
+                        ]
+                    },
+                },
+                labelInfo : {
+                    readAvail : false
+                }
+            }
+        ];
+
+        inputData.forEach((props) => {
+            searchInput(props.category, props.codeInfo, props.labelInfo);
+        });
+        
         searchForm();
     }
 
