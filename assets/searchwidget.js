@@ -3,6 +3,11 @@ SearchWidget.saveDom("infoForm", $('.info-form')); // set form
 SearchWidget.saveDom("infoRadio", $('.info-form .data-box')); // set input box
 SearchWidget.saveDom("categoryTitle", $('.category-title')); // set headline
 
+/**
+ * @description 검색 위젯 라디오 조건 컴포넌트
+ * @param {String} category 
+ * @param {Object} requirement {requirementTitle:String, items:Object{type:String, value:String}} 
+ */
 const widgetRadio = (category, requirement) => {
     const {
         infoRadio,
@@ -52,29 +57,12 @@ const widgetRadio = (category, requirement) => {
 
 };
 
-widgetRadio("선택1", { requirementTitle : "규격", items : [
-    {
-        type : "code",
-        value : "코드1"
-    },
-    {
-        type : "label",
-        value : "라벨1"
-    },
-    {
-        type : "code",
-        value : "코드2"
-    },
-    {
-        type : "label",
-        value : "라벨2"
-    },
-    {
-        type : "code",
-        value : "코드3"
-    },
-    {
-        type : "code",
-        value : "코드4"
-    }
-] });
+window.addEventListener("message", (event) => {
+    console.log(event.data)
+    const {
+        category,
+        requirement
+    } = event.data;
+
+    widgetRadio(category, requirement);
+});
