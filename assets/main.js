@@ -1,5 +1,6 @@
 const initMain = () => {
     const Main = new JSDOM();
+    const store = new JSStore().store;
     Main.saveDom("infoForm", $('.info-form')); // set form
     Main.saveDom("infoInput", $('.info-form .data-box')); // set input box
 
@@ -81,7 +82,7 @@ const initMain = () => {
                 popup.postMessage(request, "*");
             }
 
-            setTimeout(popupPost, 100);
+            store.popup = popupPost;
         });
         button.addEventListener('click', (e) => {
             const popup = window.open(popupUrl, category, popupConfig);
@@ -109,7 +110,7 @@ const initMain = () => {
                 popup.postMessage(request, "*");
             }
 
-            setTimeout(popupPost, 100);
+            store.popup = popupPost;
         })
 
         /** dom tree */
@@ -303,6 +304,21 @@ const initMain = () => {
 
         inputData.forEach((props) => {
             searchInput(props.category, props.codeInfo, props.labelInfo);
+        });
+
+        window.addEventListener("message", (event) => {
+            const {
+                eventType,
+                data
+            } = event.data;
+
+            if(eventType === "onload"){
+                store.popup();
+            } else if(eventType === "postMessage"){
+
+            } else {
+                console.error("DoS~~~~ INVALID EVENT!!!!!!!!!!!");
+            }
         });
 
         searchForm();
