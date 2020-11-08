@@ -44,7 +44,6 @@ const searchInput = (category, codeInfo, labelInfo) => {
     span.innerText = category;
     inputCode.id = `code${id}`;
     inputCode.setAttribute("type", "text");
-    inputCode.setAttribute("name", "code");
     inputCode.setAttribute("placeholder", category);
     inputCode.setAttribute("readonly", true);
     button.innerText = "검색";
@@ -74,7 +73,33 @@ const searchInput = (category, codeInfo, labelInfo) => {
 
     box.appendChild(label);
     infoInput.appendChild(box);
-} 
-searchInput('선택1', {id : 1, popupUrl : "./popup1.html"}, {readAvail : true});
-searchInput('선택2', {id : 2, popupUrl : "./popup2.html"}, {readAvail : true});
-searchInput('선택3', {id : 3, popupUrl : "./popup3.html"}, {readAvail : false});
+}
+
+
+const initMain = () => {
+  const {
+      infoForm
+  } = Main.DOM;
+
+  const render = () => {
+    searchInput('선택1', {id : 1, popupUrl : "./popup1.html"}, {readAvail : true});
+    searchInput('선택2', {id : 2, popupUrl : "./popup2.html"}, {readAvail : true});
+    searchInput('선택3', {id : 3, popupUrl : "./popup3.html"}, {readAvail : false});
+  }
+  
+  infoForm.addEventListener('submit', (e) => { // 과제 지문이 정확히 뭘말하는지 모호해서 내가 이해한대로 만든다.
+      e.preventDefault();
+      const target = [...e.target].filter((node) => node.nodeName === "INPUT");
+      target.some((node) => {
+        if(node.value.split('').join('').length > 0){
+            console.log(`${node.id}의`, `값 : ${node.value}`);
+        } else if(node.id.includes('code')){
+            alert(`${node.placeholder} 항목에 값을 입력해주세요.`);
+            return true;
+        }
+      });
+  });
+  render();
+};
+
+initMain();
