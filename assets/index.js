@@ -50,3 +50,19 @@ class JSDOM {
         this.DOM = {key : keyName, value : Node};
     }
 }
+/**
+ * @class JSStore
+ * @description 전역 상태 관리를 위한 클래스 Store
+ */
+class JSStore {
+    constructor(_store){
+        this._store = {};
+    }
+
+    get store () {
+        return this._store;
+    }
+    set store (next){
+        this._store = {...this_store, next};
+    }
+}
