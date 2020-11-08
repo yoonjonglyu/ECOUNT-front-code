@@ -65,6 +65,28 @@ const initWidget = () => {
 
         infoForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            const target = [...e.target].filter((node) => node.nodeName === "INPUT" && node.checked === true);
+            if(target.length > 0){
+                const searchData = [];
+                target.forEach((node) => {
+                    const data = {
+                        id : node.id,
+                        type : node.name,
+                        value : node.value
+                    };
+
+                    searchData.push(data);
+                });
+
+                window.opener.postMessage({
+                    eventType : "postMessage",
+                    data : {
+                        searchData : searchData
+                    }
+                }, "*");
+            } else {
+                alert("선택된 조건이 없습니다.");
+            }
         });
     }
 
