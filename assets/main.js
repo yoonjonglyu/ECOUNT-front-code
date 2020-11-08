@@ -21,7 +21,8 @@ const searchInput = (category, codeInfo, labelInfo) => {
         infoInput
     } = Main.DOM;
     const {
-        id
+        id,
+        popupUrl
     } = codeInfo;
     const {
         readAvail
@@ -47,11 +48,23 @@ const searchInput = (category, codeInfo, labelInfo) => {
     inputCode.setAttribute("placeholder", category);
     inputCode.setAttribute("readonly", true);
     button.innerText = "검색";
+    button.setAttribute("type", "button")
+
     inputLabel.id = `label${id}`;
     inputLabel.setAttribute("type", "text");
     if(readAvail){
         inputLabel.setAttribute("readonly", true);
     }
+
+    /** set event */
+    const popupConfig = "width=500,height=300,top=100,left=150,menubar=no,toolbar=no,location=no,status=yes";
+    
+    inputCode.addEventListener('dblclick', (e) => {
+        const popup = window.open(popupUrl, category, popupConfig);
+    });
+    button.addEventListener('click', (e) => {
+        const popup = window.open(popupUrl, category, popupConfig);
+    })
 
     /** dom tree */
     label.appendChild(span);
@@ -62,6 +75,6 @@ const searchInput = (category, codeInfo, labelInfo) => {
     box.appendChild(label);
     infoInput.appendChild(box);
 } 
-searchInput('선택1', {id : 1}, {readAvail : true});
-searchInput('선택2', {id : 2}, {readAvail : true});
-searchInput('선택3', {id : 3}, {readAvail : false});
+searchInput('선택1', {id : 1, popupUrl : "./popup1.html"}, {readAvail : true});
+searchInput('선택2', {id : 2, popupUrl : "./popup2.html"}, {readAvail : true});
+searchInput('선택3', {id : 3, popupUrl : "./popup3.html"}, {readAvail : false});
