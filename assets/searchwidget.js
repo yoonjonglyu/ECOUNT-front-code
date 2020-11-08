@@ -69,6 +69,13 @@ const initWidget = () => {
     }
 
     const render = () => {
+        window.opener.postMessage({ // onload 신호 보내기
+            eventType : "onload",
+            data : {
+                msg : "popup onload"
+            }
+        }, "*");
+
         window.addEventListener("message", (event) => {
             const {
                 category,
