@@ -64,7 +64,10 @@ const initMain = () => {
             }
             = requirementCode;
             const request = {
-                category : category,
+                category : {
+                    category : category,
+                    id : id
+                },
                 requirement : {
                     requirementTitle : title,
                     items : [
@@ -92,7 +95,10 @@ const initMain = () => {
             }
             = requirementBtn;
             const request = {
-                category : category,
+                category : {
+                    category : category,
+                    id : id
+                },
                 requirement : {
                     requirementTitle : title,
                     items : [
@@ -315,7 +321,11 @@ const initMain = () => {
             if(eventType === "onload"){
                 store.popup();
             } else if(eventType === "postMessage"){
-
+                if(data.searchData.length > 0){
+                    data.searchData.forEach((item) => {
+                        $(`#${item.type}${item.id}`).value = item.value;
+                    })
+                }
             } else {
                 console.error("DoS~~~~ INVALID EVENT!!!!!!!!!!!");
             }

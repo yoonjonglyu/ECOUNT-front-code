@@ -6,14 +6,18 @@ const initWidget = () => {
 
     /**
     * @description 검색 위젯 라디오 조건 컴포넌트
-    * @param {String} category 
+    * @param {Object} widgetInfo {category:String, id:Int} 
     * @param {Object} requirement {requirementTitle:String, items:Object{type:String, value:String}} 
     */
-    const widgetRadio = (category, requirement) => {
+    const widgetRadio = (widgetInfo, requirement) => {
         const {
             infoRadio,
             categoryTitle
         } = SearchWidget.DOM;
+        const {
+            category,
+            id
+        } = widgetInfo;
         const {
             requirementTitle,
             items
@@ -38,7 +42,7 @@ const initWidget = () => {
                 label.innerText = `${item.value}`;
                 input.setAttribute("type", "radio");
                 input.setAttribute("name", item.type);
-                input.setAttribute("id", item.type);
+                input.setAttribute("id", id);
                 input.value = item.value;
 
                 label.appendChild(input);
@@ -84,6 +88,8 @@ const initWidget = () => {
                         searchData : searchData
                     }
                 }, "*");
+                
+                window.close();
             } else {
                 alert("선택된 조건이 없습니다.");
             }
