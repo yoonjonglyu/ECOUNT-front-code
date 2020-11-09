@@ -8,12 +8,14 @@
 3. 화면 디자인적인 요소는 평가하지 않습니다.
 4. 서버 환경 없이 클라이언트 환경(html, javascript)만으로 동작해야 합니다.
 
+## 샘플보기
+- [이카운트 과제](https://yoonjonglyu.github.io/ECOUNT-front-code/main.html "test link")
 ## 제출 파일 구성
 
-- main.html
-- popup1.html
-- popup2.html
-- popup3.html
+- main.html - 고정
+- popup1.html - 고정
+- popup2.html - 고정
+- popup3.html - 고정
 - etc css & js
 
 ## 평가 항목
