@@ -63,6 +63,6 @@ class JSStore {
         return this._store;
     }
     set store (next){
-        this._store = {...this_store, next};
+        this._store = {...this._store, next};
     }
 }
