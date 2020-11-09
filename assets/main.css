@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+/* layout */
+
+.insert-box {
+    border : 1px solid blueviolet;
+}
+.head-box {
+    width: 100%;
+    height: auto;
+    border-bottom : 1px solid gray;
+}
+
+/* head */
+
+.head-box ul {
+    margin : 0;
+    padding : 0;
+    list-style:  none;
+}
+.head-box ul li {
+    display: inline-block;
+}
+h2 {
+    font-size: 0.8rem;
+}
+
+/* container */
+
+.data-box {
+    border : 1px solid red;
+}
+.data-box .search-insert {
+    padding: 3px 0 3px 3px;
+}
+.search-insert input {
+    margin : 0 3px;
+}
+.button-box {
+    margin: 8px 4px;
+}
