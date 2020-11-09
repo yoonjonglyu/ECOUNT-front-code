@@ -71,7 +71,11 @@ const initMain = () => {
                 requirement : {
                     requirementTitle : title,
                     items : [
-                    ]
+                    ],
+                    isAvail : {
+                        code : inputCode.value,
+                        label : inputLabel.value
+                    }
                 }
             };
 
@@ -102,7 +106,11 @@ const initMain = () => {
                 requirement : {
                     requirementTitle : title,
                     items : [
-                    ]
+                    ],
+                    isAvail : {
+                        code : inputCode.value,
+                        label : inputLabel.value
+                    }
                 }
             };
 

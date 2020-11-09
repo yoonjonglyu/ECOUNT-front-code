@@ -7,7 +7,7 @@ const initWidget = () => {
     /**
     * @description 검색 위젯 라디오 조건 컴포넌트
     * @param {Object} widgetInfo {category:String, id:Int} 
-    * @param {Object} requirement {requirementTitle:String, items:Object{type:String, value:String}} 
+    * @param {Object} requirement {requirementTitle:String, items:Object{type:String, value:String}, isAvail:Object{code:String, labal:String}} 
     */
     const widgetRadio = (widgetInfo, requirement) => {
         const {
@@ -20,7 +20,8 @@ const initWidget = () => {
         } = widgetInfo;
         const {
             requirementTitle,
-            items
+            items,
+            isAvail
         } = requirement;
 
         categoryTitle.innerText = category;
@@ -44,6 +45,9 @@ const initWidget = () => {
                 input.setAttribute("name", item.type);
                 input.setAttribute("id", id);
                 input.value = item.value;
+                if(item.value === isAvail.code || item.value === isAvail.label){
+                    input.checked = true;
+                }
 
                 label.appendChild(input);
                 inputRadio.push(label);
