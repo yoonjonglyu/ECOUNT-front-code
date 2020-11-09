@@ -147,14 +147,18 @@ const initMain = () => {
         infoForm.addEventListener('submit', (e) => { // 과제 지문이 정확히 뭘말하는지 모호해서 내가 이해한대로 만든다.
             e.preventDefault();
             const target = [...e.target].filter((node) => node.nodeName === "INPUT");
+            let result = '';
             target.some((node) => {
                 if (node.value.split('').join('').length > 0) {
-                    console.log(`${node.id}의`, `값 : ${node.value}`);
+                    result += `${node.id}의 값 : ${node.value}\n`;
                 } else if (node.id.includes('code')) {
+                    result = '';
                     alert(`${node.placeholder} 항목에 값을 입력해주세요.`);
                     return true;
                 }
             });
+            
+            console.log(result);
         });
     }
 
