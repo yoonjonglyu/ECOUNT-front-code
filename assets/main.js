@@ -152,13 +152,15 @@ const initMain = () => {
                 if (node.value.split('').join('').length > 0) {
                     result += `${node.id}의 값 : ${node.value}\n`;
                 } else if (node.id.includes('code')) {
-                    result = '';
+                    result = null;
                     alert(`${node.placeholder} 항목에 값을 입력해주세요.`);
                     return true;
                 }
             });
+            if(result !== null){
+                console.log(result);
+            }
             
-            console.log(result);
         });
     }
 
@@ -338,8 +340,6 @@ const initMain = () => {
                         $(`#${item.type}${item.id}`).value = item.value;
                     })
                 }
-            } else {
-                console.error("DoS~~~~ INVALID EVENT!!!!!!!!!!!");
             }
         });
 
